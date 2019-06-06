@@ -43,15 +43,19 @@ if not authData["sessionid"]:
 	raw_input("Press Enter to continue...")
 	sys.exit()
 	
-if not authData["steamLogin"]:
-	logging.warning(Fore.RED + "No steamLogin set" + Fore.RESET)
+if not authData["steamLogin"] and not authData["steamLoginSecure"]:
+	logging.warning(Fore.RED + "No steamLogin(Secure) set" + Fore.RESET)
 	raw_input("Press Enter to continue...")
 	sys.exit()
 
 def generateCookies():
 	global authData
 	try:
-		cookies = dict(sessionid=authData["sessionid"], steamLogin=authData["steamLogin"], steamparental=authData["steamparental"])
+		cookies = dict(
+			sessionid=authData["sessionid"],
+			steamLogin=authData["steamLogin"],
+			steamLoginSecure=authData["steamLoginSecure"],
+			steamparental=authData["steamparental"])
 	except:
 		logging.warning(Fore.RED + "Error setting cookies" + Fore.RESET)
 		raw_input("Press Enter to continue...")
